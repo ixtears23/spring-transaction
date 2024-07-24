@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: spring-transaction
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 10               # ?? ?? ??? ?
+      maximum-pool-size: 30          # ?? ??? ?
+      idle-timeout: 30000            # ?? ??? ?? ??? ?? ?? ?? (30?)
+      max-lifetime: 1800000          # ???? ?? ?? ?? (30?)
+      connection-timeout: 30000      # ???? ?? ?? ?? ?? ?? (30?)
+      connection-test-query: SELECT 1  # ??? ?? ??
+      pool-name: HikariCP            # ??? ? ??
+      auto-commit: true              # ?? ?? ??
+      allow-pool-suspension: false   # ? ?? ?? ??
+      read-only: false               # ?? ?? ?? ??
+      register-mbeans: false         # JMX MBeans ?? ??
+      validation-timeout: 5000       # ??? ?? ?? ?? (5?)
+      leak-detection-threshold: 2000 # ?? ?? ??? (2?)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mybatis:
+    config-location: classpath:mybatis-config.xml
+    mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    org:
+      springframework:
+        transaction: DEBUG
+      hibernate:
+        SQL: DEBUG
+      jdbc: TRACE
