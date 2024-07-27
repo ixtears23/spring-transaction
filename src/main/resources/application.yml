@@ -1,11 +1,41 @@
 spring:
+  profiles:
+    active: default
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  mybatis:
+    config-location: classpath:mybatis-config.xml
+    mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    root: DEBUG
+    org:
+      hibernate: TRACE
+      springframework:
+        orm:
+          jpa: TRACE
+        jdbc: TRACE
+
+---
+
+spring:
   application:
     name: spring-transaction
+  config:
+    activate:
+      on-profile: default
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: user
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       minimum-idle: 10               # ?? ?? ??? ?
       maximum-pool-size: 30          # ?? ??? ?
@@ -27,15 +57,52 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        use_sql_comments: true
   mybatis:
     config-location: classpath:mybatis-config.xml
     mapper-locations: classpath:mapper/*.xml
 
 logging:
   level:
-    org:
-      springframework:
-        transaction: DEBUG
+      root: DEBUG
+      org:
+        hibernate: TRACE
+        springframework:
+          orm:
+            jpa: TRACE
+          jdbc: TRACE
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: aws
+  datasource:
+    url: jdbc:mysql://coupon.cbowss88q0hs.ap-northeast-2.rds.amazonaws.com:3306/coupon?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: admin
+    password: dhehfflS2S2!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 10               # ?? ?? ??? ?
+      maximum-pool-size: 30          # ?? ??? ?
+      idle-timeout: 30000            # ?? ??? ?? ??? ?? ?? ?? (30?)
+      max-lifetime: 1800000          # ???? ?? ?? ?? (30?)
+      connection-timeout: 30000      # ???? ?? ?? ?? ?? ?? (30?)
+      connection-test-query: SELECT 1  # ??? ?? ??
+      pool-name: HikariCP            # ??? ? ??
+      auto-commit: true              # ?? ?? ??
+      allow-pool-suspension: false   # ? ?? ?? ??
+      read-only: false               # ?? ?? ?? ??
+      register-mbeans: false         # JMX MBeans ?? ??
+      validation-timeout: 5000       # ??? ?? ?? ?? (5?)
+      leak-detection-threshold: 2000 # ?? ?? ??? (2?)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
       hibernate:
-        SQL: DEBUG
-      jdbc: TRACE
+        format_sql: true
+        use_sql_comments: true

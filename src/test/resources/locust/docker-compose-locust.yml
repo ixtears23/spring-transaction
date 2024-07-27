@@ -1,0 +1,26 @@
+services:
+  locust-master:
+    image: locustio/locust
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
+    command: -f /mnt/locust/locustfile_none-tx.py --master
+
+  locust-worker-1:
+    image: locustio/locust
+    volumes:
+      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
+    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
+
+  locust-worker-2:
+    image: locustio/locust
+    volumes:
+      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
+    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
+
+  locust-worker-3:
+    image: locustio/locust
+    volumes:
+      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
+    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
