@@ -4,23 +4,23 @@ services:
     ports:
       - "8089:8089"
     volumes:
-      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
-    command: -f /mnt/locust/locustfile_none-tx.py --master
+      - ./locustfile_tx-readonly.py:/mnt/locust/locustfile_tx-readonly.py
+    command: -f /mnt/locust/locustfile_tx-readonly.py --master
 
   locust-worker-1:
     image: locustio/locust
     volumes:
-      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
-    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
+      - ./locustfile_tx-readonly.py:/mnt/locust/locustfile_tx-readonly.py
+    command: -f /mnt/locust/locustfile_tx-readonly.py --worker --master-host locust-master
 
   locust-worker-2:
     image: locustio/locust
     volumes:
-      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
-    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
+      - ./locustfile_tx-readonly.py:/mnt/locust/locustfile_tx-readonly.py
+    command: -f /mnt/locust/locustfile_tx-readonly.py --worker --master-host locust-master
 
   locust-worker-3:
     image: locustio/locust
     volumes:
-      - ./locustfile_none-tx.py:/mnt/locust/locustfile_none-tx.py
-    command: -f /mnt/locust/locustfile_none-tx.py --worker --master-host locust-master
+      - ./locustfile_tx-readonly.py:/mnt/locust/locustfile_tx-readonly.py
+    command: -f /mnt/locust/locustfile_tx-readonly.py --worker --master-host locust-master

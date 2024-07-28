@@ -14,6 +14,13 @@ public class OrderTxService {
 
     @Transactional
     public OrderDto creatOrder(String description) {
+        final OrderEntity orderEntity = orderRepository.findFirstByDescription(description)
+                .orElse(null);
+
+        if (orderEntity == null) {
+            throw new RuntimeException("=== 이미 해당 description은 존재하기 때문에 더 이상 생성할 수 없습니다.");
+        }
+
         return OrderDto.toOrderDto(createOrder(description));
     }
 

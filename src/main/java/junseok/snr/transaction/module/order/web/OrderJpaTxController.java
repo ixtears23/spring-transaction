@@ -3,6 +3,8 @@ package junseok.snr.transaction.module.order.web;
 import junseok.snr.transaction.core.order.dto.OrderDto;
 import junseok.snr.transaction.module.order.application.OrderTxService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -12,13 +14,19 @@ public class OrderJpaTxController {
     private final OrderTxService orderTxService;
 
     @PostMapping
-    public OrderDto creatOrder(@RequestParam String description) {
-        return orderTxService.creatOrder(description);
+    public ResponseEntity<OrderDto> creatOrder(@RequestParam String description) {
+        return new ResponseEntity<>(
+                orderTxService.creatOrder(description),
+                HttpStatus.CREATED
+        );
     }
 
     @PostMapping("/readonly")
-    public OrderDto creatOrderdReadOnly(@RequestParam String description) {
-        return orderTxService.creatOrderdReadOnly(description);
+    public ResponseEntity<OrderDto> creatOrderdReadOnly(@RequestParam String description) {
+        return new ResponseEntity<>(
+                orderTxService.creatOrderdReadOnly(description),
+                HttpStatus.CREATED
+        );
     }
 
     @GetMapping("/none-readonly/{id}")

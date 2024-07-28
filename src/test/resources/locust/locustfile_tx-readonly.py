@@ -3,7 +3,6 @@ from locust import HttpUser, task, between
 import random
 
 class NoTxUser(HttpUser):
-    wait_time = between(1, 2)
 
     @task(5)
     def create_and_get_order(self):
