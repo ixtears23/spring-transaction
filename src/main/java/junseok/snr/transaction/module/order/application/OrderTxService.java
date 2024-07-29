@@ -2,8 +2,11 @@ package junseok.snr.transaction.module.order.application;
 
 import junseok.snr.transaction.core.order.dto.OrderDto;
 import junseok.snr.transaction.core.order.entity.OrderEntity;
+import junseok.snr.transaction.core.order.exception.ErrorCode;
+import junseok.snr.transaction.core.order.exception.OrderException;
 import junseok.snr.transaction.core.order.infrastructure.OrderRepository;
 import junseok.snr.transaction.core.outbox.event.OrderEvent;
+import junseok.snr.transaction.core.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -17,21 +20,29 @@ public class OrderTxService {
 
     @Transactional
     public OrderDto creatOrder(String description) {
-        final OrderEntity orderEntity = orderRepository.findFirstByDescription(description)
-                .orElse(null);
+        validateCreateOrder(description);
 
-        if (orderEntity == null) {
-            throw new RuntimeException("=== 이미 해당 description은 존재하기 때문에 더 이상 생성할 수 없습니다.");
-        }
+        final OrderEntity newOrderEntity = OrderEntity.builder()
+                .description(description)
+//                .user(UserEntity.builder().build())
+                .build();
+        orderRepository.save(newOrderEntity);
 
         eventPublisher.publishEvent(
                 new OrderEvent(
-                        orderEntity.getId(),
+                        newOrderEntity.getId(),
                         description
                 )
         );
 
         return OrderDto.toOrderDto(createOrder(description));
+    }
+
+    private void validateCreateOrder(String description) {
+        final OrderEntity orderEntity = orderRepository.findFirstByDescription(description)
+                .orElse(null);
+
+        if (orderEntity != null) throw new OrderException(ErrorCode.ALREADY_EXISTS_ORDER);
     }
 
     @Transactional(readOnly = true)

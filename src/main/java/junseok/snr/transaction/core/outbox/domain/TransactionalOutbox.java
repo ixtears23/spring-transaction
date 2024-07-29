@@ -18,6 +18,7 @@ public class TransactionalOutbox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
     private String eventType;
+    private Status status;
     private Long domainId;
     private Long order;
     private String payload;
