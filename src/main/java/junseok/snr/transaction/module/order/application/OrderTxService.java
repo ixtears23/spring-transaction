@@ -3,7 +3,9 @@ package junseok.snr.transaction.module.order.application;
 import junseok.snr.transaction.core.order.dto.OrderDto;
 import junseok.snr.transaction.core.order.entity.OrderEntity;
 import junseok.snr.transaction.core.order.infrastructure.OrderRepository;
+import junseok.snr.transaction.core.outbox.event.OrderEvent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderTxService {
     private final OrderRepository orderRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public OrderDto creatOrder(String description) {
@@ -20,6 +23,13 @@ public class OrderTxService {
         if (orderEntity == null) {
             throw new RuntimeException("=== 이미 해당 description은 존재하기 때문에 더 이상 생성할 수 없습니다.");
         }
+
+        eventPublisher.publishEvent(
+                new OrderEvent(
+                        orderEntity.getId(),
+                        description
+                )
+        );
 
         return OrderDto.toOrderDto(createOrder(description));
     }

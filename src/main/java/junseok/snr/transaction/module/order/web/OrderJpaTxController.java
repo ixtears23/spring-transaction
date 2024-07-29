@@ -3,6 +3,7 @@ package junseok.snr.transaction.module.order.web;
 import junseok.snr.transaction.core.order.dto.OrderDto;
 import junseok.snr.transaction.module.order.application.OrderTxService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/orders/jpa/tx")
 public class OrderJpaTxController {
     private final OrderTxService orderTxService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @PostMapping
     public ResponseEntity<OrderDto> creatOrder(@RequestParam String description) {
