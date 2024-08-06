@@ -1,0 +1,16 @@
+services:
+  master:
+    image: locustio/locust
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/inventory-reduce.py --master -H http://host.docker.internal:8080
+
+  worker:
+    image: locustio/locust
+    deploy:
+      replicas: 3
+    volumes:
+      - ./:/mnt/locust
+    command: -f /mnt/locust/inventory-reduce.py --worker --master-host master
