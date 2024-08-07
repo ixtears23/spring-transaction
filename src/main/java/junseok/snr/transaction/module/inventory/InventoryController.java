@@ -15,7 +15,7 @@ public class InventoryController {
         try {
             inventoryService.reduceStock(productId, quantity);
             return "Stock reduced successfully";
-        } catch (RuntimeException | InterruptedException e) {
+        } catch (RuntimeException e) {
             return "Error: " + e.getMessage();
         }
     }

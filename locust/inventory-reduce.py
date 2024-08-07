@@ -5,8 +5,9 @@ class CouponApi(FastHttpUser):
     network_timeout = 30.0
     connection_timeout = 30.0
 
-    def __init__(self, environment):
-        super().__init__(environment)
+    def __init__(self, environment, **kwargs):
+        super().__init__(environment, **kwargs)
+        self.client.timeout = (self.connection_timeout, self.network_timeout)
 
     @task
     def issue_coupon_1(self):

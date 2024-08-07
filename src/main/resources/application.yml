@@ -7,8 +7,8 @@ spring:
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      minimum-idle: 10
-      maximum-pool-size: 30
+      minimum-idle: 16
+      maximum-pool-size: 32
       idle-timeout: 30000
       max-lifetime: 1800000
       connection-timeout: 30000
@@ -42,7 +42,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -50,13 +50,7 @@ spring:
 
 logging:
   level:
-      root: DEBUG
-      org:
-        hibernate: TRACE
-        springframework:
-          orm:
-            jpa: TRACE
-          jdbc: TRACE
+      root:
 
 
 ---
