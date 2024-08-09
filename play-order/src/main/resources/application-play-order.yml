@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: play-order
+
+server:
+  port: 8081
