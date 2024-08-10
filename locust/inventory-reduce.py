@@ -11,8 +11,8 @@ class CouponApi(FastHttpUser):
 
     @task
     def issue_coupon_1(self):
-        quantity = random.randint(1, 100)
-        with self.client.post(f"/v1/inventory/reduce?productId=1&quantity={quantity}", name="재고 감소 API", catch_response=True) as response:
+        quantity = random.randint(1, 10)
+        with self.client.post(f"/v1/inventory/reduce?inventoryId=1&quantity={quantity}", name="재고 감소 API", catch_response=True) as response:
             if response.status_code == 200:  # Assuming 200 is the expected status code
                 response.success()
             else:

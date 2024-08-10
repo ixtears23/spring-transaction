@@ -1,22 +1,16 @@
 package junseok.snr.inventory;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/inventory")
 public class InventoryController {
-
-    @Autowired
-    private InventoryService inventoryService;
+    private final InventoryService inventoryService;
 
     @PostMapping("/reduce")
-    public String reduceStock(@RequestParam String productId, @RequestParam int quantity) {
-        try {
-            inventoryService.reduceStock(productId, quantity);
-            return "Stock reduced successfully";
-        } catch (RuntimeException e) {
-            return "Error: " + e.getMessage();
-        }
+    public void reduceStock(@RequestParam long inventoryId, @RequestParam int quantity) {
+        inventoryService.reduceStock(inventoryId, quantity);
     }
 }
