@@ -34,4 +34,9 @@ public class InventoryService {
             log.info("=== Lock 해제");
         }
     }
+
+    public InventoryEntity getInventory(long inventoryId) {
+        return inventoryRepository.findById(inventoryId)
+                .orElseThrow();
+    }
 }

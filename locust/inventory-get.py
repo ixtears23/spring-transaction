@@ -10,9 +10,9 @@ class PlayApi(FastHttpUser):
         self.client.timeout = (self.connection_timeout, self.network_timeout)
 
     @task
-    def reduce_inventory(self):
-        quantity = random.randint(1, 10)
-        with self.client.post(f"/v1/inventory/reduce?inventoryId=1&quantity={quantity}", name="재고 감소 API", catch_response=True) as response:
+    def get_inventory(self):
+        inventory_id = 1  # Inventory ID를 고정 값으로 사용합니다.
+        with self.client.get(f"/v1/inventory/get?inventoryId={inventory_id}", name="재고 조회 API", catch_response=True) as response:
             if response.status_code == 200:  # Assuming 200 is the expected status code
                 response.success()
             else:
