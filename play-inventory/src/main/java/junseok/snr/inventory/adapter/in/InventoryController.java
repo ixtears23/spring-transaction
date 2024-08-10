@@ -1,6 +1,7 @@
-package junseok.snr.inventory;
+package junseok.snr.inventory.adapter.in;
 
-import junseok.snr.core.inventory.entity.InventoryEntity;
+import junseok.snr.core.inventory.domain.model.Inventory;
+import junseok.snr.inventory.application.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 public class InventoryController {
     private final InventoryService inventoryService;
 
+    @GetMapping
+    public ResponseEntity<Inventory> get(@RequestParam long inventoryId) {
+        return ResponseEntity.ok(inventoryService.getInventory(inventoryId));
+    }
+
     @PostMapping("/reduce")
     public void reduceStock(@RequestParam long inventoryId, @RequestParam int quantity) {
         inventoryService.reduceStock(inventoryId, quantity);
-    }
-
-    @GetMapping
-    public ResponseEntity<InventoryEntity> get(@RequestParam long inventoryId) {
-        return ResponseEntity.ok(inventoryService.getInventory(inventoryId));
     }
 }

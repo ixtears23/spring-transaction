@@ -1,6 +1,6 @@
 package junseok.snr.order.application;
 
-import junseok.snr.core.outbox.adaptor.out.TransactionalOutboxRepository;
+import junseok.snr.core.outbox.adapter.out.TransactionalOutboxRepository;
 import junseok.snr.core.outbox.domain.Status;
 import junseok.snr.core.outbox.domain.TransactionalOutbox;
 import junseok.snr.core.outbox.event.OrderEvent;

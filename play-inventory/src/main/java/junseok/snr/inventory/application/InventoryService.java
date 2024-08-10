@@ -1,6 +1,9 @@
-package junseok.snr.inventory;
+package junseok.snr.inventory.application;
 
-import junseok.snr.core.inventory.entity.InventoryEntity;
+import junseok.snr.core.inventory.domain.model.Inventory;
+import junseok.snr.inventory.application.port.out.InventoryRepository;
+import junseok.snr.inventory.application.port.in.GetInventoryUseCase;
+import junseok.snr.inventory.application.port.in.ReduceInventoryUserCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -13,14 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class InventoryService {
+public class InventoryService implements GetInventoryUseCase, ReduceInventoryUserCase {
+
     private final RedissonClient redissonClient;
     private final InventoryRepository inventoryRepository;
 
     @Transactional
     public void reduceStock(long inventoryId, int quantity) {
-        InventoryEntity inventoryEntity = inventoryRepository.findById(inventoryId)
-                .orElseThrow();
+        Inventory inventory= inventoryRepository.findById(inventoryId);
 
         RLock rLock = redissonClient.getLock(CommonOptions.name("decreaseStock"));
 
@@ -28,15 +31,17 @@ public class InventoryService {
             log.info("=== Lock 획득 시도");
             rLock.lock();
             log.info("=== Lock 획득 성공");
-            inventoryEntity.decreaseQuantity(quantity);
+            inventory.decreaseQuantity(quantity);
         } finally {
             rLock.unlock();
             log.info("=== Lock 해제");
         }
     }
 
-    public InventoryEntity getInventory(long inventoryId) {
-        return inventoryRepository.findById(inventoryId)
-                .orElseThrow();
+    @Transactional
+    public Inventory getInventory(long inventoryId) {
+        Inventory inventory = inventoryRepository.findById(inventoryId);
+
+        return inventory;
     }
 }
