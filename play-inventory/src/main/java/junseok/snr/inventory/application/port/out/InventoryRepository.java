@@ -1,7 +1,8 @@
 package junseok.snr.inventory.application.port.out;
 
-import junseok.snr.core.inventory.domain.model.Inventory;
+import junseok.snr.core.inventory.entity.InventoryEntity;
 
 public interface InventoryRepository {
-    Inventory findById(long inventoryId);
+    InventoryEntity findById(long inventoryId);
+    void save(InventoryEntity inventoryEntity);
 }
