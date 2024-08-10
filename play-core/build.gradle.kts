@@ -14,6 +14,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.redisson:redisson-spring-boot-starter:${redissonVersion}")
     implementation("com.github.ben-manes.caffeine:caffeine")
+    implementation("software.amazon.awssdk:secretsmanager:2.27.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
