@@ -1,7 +1,4 @@
 spring:
-  profiles:
-    active: default
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,8 +13,6 @@ spring:
 ---
 
 spring:
-  application:
-    name: spring-transaction
   config:
     activate:
       on-profile: default
@@ -46,25 +41,6 @@ spring:
   config:
     activate:
       on-profile: aws
-  datasource:
-    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-    username: user
-    password: password
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      minimum-idle: 1
-      maximum-pool-size: 200
-      idle-timeout: 30000
-      max-lifetime: 1800000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
-      pool-name: HikariCP
-      auto-commit: true
-      allow-pool-suspension: false
-      read-only: false
-      register-mbeans: false
-      validation-timeout: 5000
-      leak-detection-threshold: 2000
 logging:
   level:
     root: DEBUG

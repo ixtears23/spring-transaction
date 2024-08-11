@@ -4,3 +4,25 @@ spring:
 
 server:
   port: 8082
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: default
+
+aws:
+  secret-manager:
+    name: spring-transaction-local
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: aws
+
+aws:
+  secret-manager:
+    name: spring-transaction

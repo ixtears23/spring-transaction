@@ -15,22 +15,16 @@ import java.util.Map;
 @Configuration
 public class DatabaseConfig {
     private final SecretManagerService secretManagerService;
-    @Value("${spring.profiles.active}")
-    private String springActiveProfile;
+    @Value("${aws.secret-manager.name}")
+    private String awsSecretManagerName;
 
     @Bean
     public DataSource dataSource() {
         String dbSecretName = "rds!db-ecd1f9b7-3d59-435c-b631-aa6522de891f";
-        String defaultSecretName = "spring-transaction";
         Map<String, String> dbSecretMap = secretManagerService.getSecret(dbSecretName);
-        Map<String, String> defaultSecretMap = secretManagerService.getSecret(defaultSecretName);
+        Map<String, String> defaultSecretMap = secretManagerService.getSecret(awsSecretManagerName);
 
         String url = defaultSecretMap.get("url");
-
-        if ("default".equals(springActiveProfile)) {
-            url = "jdbc:mysql://localhost:3306";
-        }
-
         String username = dbSecretMap.get("username");
         String password = dbSecretMap.get("password");
 
@@ -39,7 +33,7 @@ public class DatabaseConfig {
         config.setUsername(username);
         config.setPassword(password);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setMinimumIdle(1);
+        config.setMinimumIdle(200);
         config.setMaximumPoolSize(200);
         config.setIdleTimeout(30000);
         config.setMaxLifetime(1800000);

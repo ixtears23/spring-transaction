@@ -5,7 +5,7 @@ services:
       - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/inventory-reduce.py --master -H http://host.docker.internal:8082
+    command: -f /mnt/locust/inventory-reduce.py --master -H http://43.201.255.179:8082
 
   worker:
     image: locustio/locust

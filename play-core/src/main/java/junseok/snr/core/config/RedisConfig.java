@@ -13,7 +13,7 @@ public class RedisConfig {
     public RedissonClient redisson() {
         Config config = new Config();
         config.useSingleServer()
-                .setAddress("redis://127.0.0.1:6379");
+                .setAddress("redis://clustercfg.spring-transaction-redis.8hqjuq.apn2.cache.amazonaws.com:6379");
 
         return Redisson.create(config);
     }
