@@ -17,5 +17,8 @@ public class InventoryEntity {
     private Long id;
     private int quantity;
 
+    @Version
+    private Integer version;
+
 
 }
