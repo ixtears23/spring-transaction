@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class InventoryFacadeService implements GetInventoryUseCase, ReduceInventoryUserCase {
+public class InventoryProxyService implements GetInventoryUseCase, ReduceInventoryUserCase {
     private final InventoryService inventoryService;
     private final RedissonClient redissonClient;
     private final InventoryRepository inventoryRepository;

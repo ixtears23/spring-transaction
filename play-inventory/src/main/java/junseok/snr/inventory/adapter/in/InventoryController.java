@@ -4,6 +4,7 @@ import junseok.snr.core.inventory.domain.model.Inventory;
 import junseok.snr.inventory.application.port.in.GetInventoryUseCase;
 import junseok.snr.inventory.application.port.in.ReduceInventoryUserCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/inventory")
 public class InventoryController {
     private final GetInventoryUseCase getInventoryUseCase;
+    @Qualifier("inventoryProxyService")
     private final ReduceInventoryUserCase reduceInventoryUserCase;
 
     @GetMapping
