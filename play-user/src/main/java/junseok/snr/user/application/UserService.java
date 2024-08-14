@@ -1,6 +1,4 @@
-package junseok.snr.transaction.user.application;
-
-import junseok.snr.core.user.dto.UserDto;
+package junseok.snr.user.application;
 
 import java.util.List;
 

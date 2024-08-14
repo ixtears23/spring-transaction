@@ -1,6 +1,5 @@
-package junseok.snr.transaction.user.application;
+package junseok.snr.user.application;
 
-import junseok.snr.core.user.dto.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package junseok.snr.inventory.adapter.in;
 
-import junseok.snr.core.inventory.domain.model.Inventory;
+import junseok.snr.inventory.domain.Inventory;
 import junseok.snr.inventory.application.port.in.GetInventoryUseCase;
 import junseok.snr.inventory.application.port.in.ReduceInventoryUserCase;
 import lombok.RequiredArgsConstructor;

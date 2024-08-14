@@ -1,5 +1,5 @@
 services:
-  mysql:
+  inventory-mysql:
     image: mysql:8.0.29
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -7,9 +7,33 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - inventory-mysql-data:/var/lib/mysql
+    restart: always
+  classes-mysql:
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3308:3306"
+    volumes:
+      - classes-mysql-data:/var/lib/mysql
+    restart: always
+  reservation-mysql:
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3305:3306"
+    volumes:
+      - reservation-mysql-data:/var/lib/mysql
     restart: always
   redis:
     image: redis:7.4.0
@@ -20,7 +44,11 @@ services:
     restart: always
 
 volumes:
-  mysql-data:
+  inventory-mysql-data:
+    driver: local
+  classes-mysql-data:
+    driver: local
+  reservation-mysql-data:
     driver: local
   redis-data:
     driver: local

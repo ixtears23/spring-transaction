@@ -1,8 +1,7 @@
 package junseok.snr.order.application;
 
-import junseok.snr.core.order.dto.OrderDto;
-import junseok.snr.core.order.entity.OrderEntity;
-import junseok.snr.core.order.infrastructure.OrderRepository;
+import junseok.snr.order.adapter.out.entity.OrderEntity;
+import junseok.snr.order.adapter.out.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

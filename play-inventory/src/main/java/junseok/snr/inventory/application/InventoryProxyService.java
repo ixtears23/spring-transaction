@@ -1,7 +1,7 @@
 package junseok.snr.inventory.application;
 
-import junseok.snr.core.inventory.domain.model.Inventory;
-import junseok.snr.core.inventory.entity.InventoryEntity;
+import junseok.snr.inventory.domain.Inventory;
+import junseok.snr.inventory.adapter.out.entity.InventoryEntity;
 import junseok.snr.inventory.adapter.out.InventoryMapper;
 import junseok.snr.inventory.application.port.in.GetInventoryUseCase;
 import junseok.snr.inventory.application.port.in.ReduceInventoryUserCase;

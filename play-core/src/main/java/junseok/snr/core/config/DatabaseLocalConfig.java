@@ -17,12 +17,14 @@ import java.util.Map;
 @Configuration
 public class DatabaseLocalConfig {
     private final SecretManagerService secretManagerService;
+    @Value("${datasource.url}")
+    private String jdbcUrl;
 
     @Bean
     public DataSource dataSource() {
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true");
+        config.setJdbcUrl(jdbcUrl);
         config.setUsername("user");
         config.setPassword("password");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");

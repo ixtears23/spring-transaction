@@ -1,9 +1,9 @@
 spring:
   application:
-    name: play-inventory
+    name: play-reservation
 
 server:
-  port: 8082
+  port: 8084
 
 ---
 
@@ -13,8 +13,7 @@ spring:
       on-profile: local
 
 datasource:
-  url: "jdbc:mysql://localhost:3307/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"
-
+  url: "jdbc:mysql://localhost:3305/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"
 
 ---
 
