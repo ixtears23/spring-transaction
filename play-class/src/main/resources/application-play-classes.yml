@@ -11,6 +11,14 @@ spring:
   config:
     activate:
       on-profile: local
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
 
 datasource:
   url: "jdbc:mysql://localhost:3308/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"
