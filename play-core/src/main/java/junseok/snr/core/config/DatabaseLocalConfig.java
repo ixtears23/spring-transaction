@@ -12,28 +12,19 @@ import org.springframework.context.annotation.Profile;
 import javax.sql.DataSource;
 import java.util.Map;
 
-@Profile({"aws", "default"})
+@Profile("local")
 @RequiredArgsConstructor
 @Configuration
-public class DatabaseConfig {
+public class DatabaseLocalConfig {
     private final SecretManagerService secretManagerService;
-    @Value("${aws.secret-manager.name}")
-    private String awsSecretManagerName;
 
     @Bean
     public DataSource dataSource() {
-        String dbSecretName = "rds!db-ecd1f9b7-3d59-435c-b631-aa6522de891f";
-        Map<String, String> dbSecretMap = secretManagerService.getSecret(dbSecretName);
-        Map<String, String> defaultSecretMap = secretManagerService.getSecret(awsSecretManagerName);
-
-        String url = defaultSecretMap.get("url");
-        String username = dbSecretMap.get("username");
-        String password = dbSecretMap.get("password");
 
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(url + "/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true");
-        config.setUsername(username);
-        config.setPassword(password);
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true");
+        config.setUsername("user");
+        config.setPassword("password");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setMinimumIdle(200);
         config.setMaximumPoolSize(200);
