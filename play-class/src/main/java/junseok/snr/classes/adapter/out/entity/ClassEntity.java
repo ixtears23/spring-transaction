@@ -9,14 +9,12 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "class")
 public class ClassEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private long classId; // Redis와 연동되는 고유한 수업 ID
+    private Long classId;
 
     @Column(nullable = false)
     private String name;

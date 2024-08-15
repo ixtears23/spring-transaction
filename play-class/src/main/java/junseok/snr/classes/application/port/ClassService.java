@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 @RequiredArgsConstructor
 @Service
 public class ClassService implements SaveClassUseCase {
     private final ClassRepository classRepository;
+    private final Random random = new Random();
 
     @Override
     public void create500Classes() {
@@ -26,10 +27,9 @@ public class ClassService implements SaveClassUseCase {
                 "2:1 그룹수업",
                 "그룹수업"
         );
-        Random random = new Random();
         List<ClassEntity> classEntities = new ArrayList<>();
 
-        IntStream.range(0, 500)
+        LongStream.range(0, 500)
                 .forEach(i -> {
                     int maxCapacity = 100;
                     classEntities.add(
