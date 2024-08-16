@@ -35,6 +35,18 @@ services:
     volumes:
       - reservation-mysql-data:/var/lib/mysql
     restart: always
+  classes-reservation-mysql:
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3311:3306"
+    volumes:
+      - classes-reservation-mysql-data:/var/lib/mysql
+    restart: always
   redis:
     image: redis:7.4.0
     ports:
@@ -49,6 +61,8 @@ volumes:
   classes-mysql-data:
     driver: local
   reservation-mysql-data:
+    driver: local
+  classes-reservation-mysql-data:
     driver: local
   redis-data:
     driver: local

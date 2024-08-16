@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: play-classes
+
+server:
+  port: 8087
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+
+datasource:
+  url: "jdbc:mysql://localhost:3311/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true"
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: default
+
+aws:
+  secret-manager:
+    name: spring-transaction-local
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: aws
+
+aws:
+  secret-manager:
+    name: spring-transaction
