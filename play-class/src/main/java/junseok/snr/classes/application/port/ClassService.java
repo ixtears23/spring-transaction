@@ -5,6 +5,7 @@ import junseok.snr.classes.application.port.in.SaveClassUseCase;
 import junseok.snr.classes.application.port.out.ClassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ClassService implements SaveClassUseCase {
     private final ClassRepository classRepository;
     private final Random random = new Random();
 
+    @Transactional
     @Override
     public void create500Classes() {
         List<String> classNames = List.of(
@@ -34,7 +36,6 @@ public class ClassService implements SaveClassUseCase {
                     int maxCapacity = 100;
                     classEntities.add(
                             ClassEntity.builder()
-                                    .classId(i)
                                     .name(classNames.get(random.nextInt(classNames.size())))
                                     .maxCapacity((random.nextInt((maxCapacity / 5) + 1)) * 5)
                                     .currentCount(0)

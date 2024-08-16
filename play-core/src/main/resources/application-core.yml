@@ -9,6 +9,16 @@ spring:
         use_sql_comments: true
     open-in-view: off
 
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG  # SQL 쿼리 출력
+        type:
+          descriptor:
+            sql: TRACE  # SQL 파라미터까지 모두 출력
+
 ---
 
 spring:
@@ -53,9 +63,9 @@ spring:
 
 logging:
   level:
-    root: INFO
+    root: DEBUG
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql: TRACE
 
 
 ---

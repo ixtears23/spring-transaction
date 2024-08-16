@@ -28,8 +28,8 @@ public class DatabaseLocalConfig {
         config.setUsername("user");
         config.setPassword("password");
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setMinimumIdle(200);
-        config.setMaximumPoolSize(200);
+        config.setMinimumIdle(50);
+        config.setMaximumPoolSize(50);
         config.setIdleTimeout(30000);
         config.setMaxLifetime(1800000);
         config.setConnectionTimeout(30000);
