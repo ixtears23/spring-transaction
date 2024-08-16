@@ -5,7 +5,7 @@ services:
       - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/inventory-reduce.py --master -H http://43.201.255.179:8082
+    command: -f /mnt/locust/reserve-one.py --master -H http://host.docker.internal:8087
 
   worker:
     image: locustio/locust
@@ -13,4 +13,4 @@ services:
       replicas: 3
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/inventory-reduce.py --worker --master-host master
+    command: -f /mnt/locust/reserve-one.py --worker --master-host master
