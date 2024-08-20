@@ -38,7 +38,7 @@ public class ClassService implements SaveClassUseCase, GetClassUseCase {
                     classesList.add(
                             Classes.builder()
                                     .name(classNames.get(random.nextInt(classNames.size())))
-                                    .maxCapacity((random.nextInt((maxCapacity / 5) + 1)) * 5)
+                                    .maxCapacity((random.nextInt((maxCapacity / 5) + 1)) + 10000)
                                     .currentCount(0)
                                     .build()
                     );
