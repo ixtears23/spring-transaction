@@ -25,8 +25,14 @@ datasource:
 
 logging:
   level:
+    root: INFO
     sun.rmi: INFO
     javax.management.remote.rmi: INFO
+    org.springframework: INFO
+    com.zaxxer.hikari.pool.HikariPool: DEBUG
+    org.hibernate: DEBUG
+    org.apache.coyote: DEBUG
+
 
 ---
 

@@ -1,5 +1,6 @@
 package junseok.snr.classes.reservation.application.service;
 
+import junseok.snr.classes.reservation.application.exception.ReservationException;
 import junseok.snr.classes.reservation.application.port.in.GetClassUseCase;
 import junseok.snr.classes.reservation.application.port.in.ReserveUseCase;
 import junseok.snr.classes.reservation.application.port.out.SaveClassPort;
@@ -25,7 +26,7 @@ public class ReservationService implements ReserveUseCase {
         Classes classes = getClassUseCase.getClass(classId);
 
         if (!classes.canReserve()) {
-            throw new RuntimeException("Can't reserve class");
+            throw new ReservationException("Can't reserve class");
         }
 
         Reservation reservation = Reservation.builder()
