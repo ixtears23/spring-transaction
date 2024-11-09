@@ -19,3 +19,6 @@
 docker compose up -d
 ~~~
 
+
+## 모니터링 서버와 연결된 모듈
+`play-class` 모듈은 메트릭을 노출하고 있음
